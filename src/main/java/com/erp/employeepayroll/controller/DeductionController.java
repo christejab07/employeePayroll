@@ -5,6 +5,7 @@ import com.erp.employeepayroll.dto.response.DeductionResponse;
 import com.erp.employeepayroll.model.Deduction;
 import com.erp.employeepayroll.service.DeductionService;
 
+import com.erp.employeepayroll.util.SwaggerTags;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/deductions")
 @RequiredArgsConstructor
-@Tag(name = "Deduction Management", description = "APIs for managing deductions")
+@Tag(name = SwaggerTags.DEDUCTION, description = "APIs for managing deductions")
 public class DeductionController {
 
     private final DeductionService deductionService;

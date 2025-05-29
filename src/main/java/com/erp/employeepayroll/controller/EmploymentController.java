@@ -3,6 +3,7 @@ package com.erp.employeepayroll.controller;
 import com.erp.employeepayroll.dto.request.EmploymentRequest;
 import com.erp.employeepayroll.dto.response.EmploymentResponse;
 import com.erp.employeepayroll.service.EmploymentService;
+import com.erp.employeepayroll.util.SwaggerTags;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -21,7 +22,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/employments")
-@Tag(name = "Employments", description = "API for managing employee employment records.")
+@Tag(name = SwaggerTags.EMPLOYMENT, description = "API for managing employee employment records.")
 @SecurityRequirement(name = "Bearer Authentication") // Applies JWT security to all endpoints in this controller
 public class EmploymentController {
 

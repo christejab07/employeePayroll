@@ -5,6 +5,7 @@ import com.erp.employeepayroll.dto.request.EmployeeRequest;
 import com.erp.employeepayroll.dto.response.EmployeeResponse;
 import com.erp.employeepayroll.dto.response.JwtAuthResponse;
 import com.erp.employeepayroll.service.AuthService;
+import com.erp.employeepayroll.util.SwaggerTags;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -21,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/auth")
-@Tag(name = "Auth Controller", description = "APIs for user authentication and registration")
+@Tag(name = SwaggerTags.AUTH, description = "APIs for user authentication and registration")
 public class AuthController {
 
     private final AuthService authService;

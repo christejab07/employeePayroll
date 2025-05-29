@@ -2,6 +2,7 @@ package com.erp.employeepayroll.controller;
 
 import com.erp.employeepayroll.dto.response.MessageResponse;
 import com.erp.employeepayroll.service.MessageService;
+import com.erp.employeepayroll.util.SwaggerTags;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -20,7 +21,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/messages")
-@Tag(name = "Messages", description = "API for viewing system-generated messages and payroll notifications.")
+@Tag(name = SwaggerTags.MESSAGE, description = "API for viewing system-generated messages and payroll notifications.")
 @SecurityRequirement(name = "Bearer Authentication") // Applies JWT security to all endpoints in this controller
 public class MessageController {
 

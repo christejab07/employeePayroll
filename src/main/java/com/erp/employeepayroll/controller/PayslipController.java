@@ -3,6 +3,7 @@ package com.erp.employeepayroll.controller;
 import com.erp.employeepayroll.dto.request.PayslipGenerationRequest;
 import com.erp.employeepayroll.dto.response.PayslipResponse;
 import com.erp.employeepayroll.service.PayslipService;
+import com.erp.employeepayroll.util.SwaggerTags;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -20,7 +21,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/payslips")
-@Tag(name = "Payslip Controller", description = "APIs for managing payslips (generate, view, approve)")
+@Tag(name = SwaggerTags.PAYSLIP, description = "APIs for managing payslips (generate, view, approve)")
 @SecurityRequirement(name = "Bearer Authentication") // Applies JWT security to all methods in this controller
 public class PayslipController {
 
