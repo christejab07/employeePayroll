@@ -1,5 +1,6 @@
 package com.erp.employeepayroll.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -10,15 +11,21 @@ import java.util.Properties;
 @Configuration
 public class MailConfig {
 
+    @Value("${spring.mail.username}")
+    private String username;
+    @Value("${spring.mail.password}")
+    private String password;
+    @Value("${spring.mail.host}")
+    private String host;
     @Bean
     public JavaMailSender javaMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 
         // Mailtrap configuration
-        mailSender.setHost("sandbox.smtp.mailtrap.io");
+        mailSender.setHost(host);
         mailSender.setPort(2525);
-        mailSender.setUsername("11c792a1f55e19"); // Replace with your Mailtrap username
-        mailSender.setPassword("0e9e4cddca0286"); // Replace with your Mailtrap password
+        mailSender.setUsername(username); // Replace with your Mailtrap username
+        mailSender.setPassword(password); // Replace with your Mailtrap password
 
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");
