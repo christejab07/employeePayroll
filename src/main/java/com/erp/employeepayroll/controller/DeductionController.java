@@ -24,13 +24,13 @@ public class DeductionController {
     private final DeductionService deductionService;
 
     @PostMapping
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
     public ResponseEntity<DeductionResponse> createDeduction(@Valid @RequestBody DeductionRequest deduction) {
         return ResponseEntity.ok(deductionService.createDeduction(deduction));
     }
 
     @PutMapping("/{code}")
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
     public ResponseEntity<DeductionResponse> updateDeduction(@PathVariable String code,
                                                      @Valid @RequestBody DeductionRequest deduction) {
         deduction.setCode(code);
@@ -50,7 +50,7 @@ public class DeductionController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
     public ResponseEntity<Void> deleteDeduction(@PathVariable Long id) {
         deductionService.deleteDeduction(id);
         return ResponseEntity.noContent().build();
