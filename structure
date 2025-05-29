@@ -1,0 +1,150 @@
+rwanda-erp-payroll/
+├── .mvn/
+│   └── wrapper/
+│       ├── maven-wrapper.jar
+│       └── maven-wrapper.properties
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── com/
+│   │   │       └── rwanda/
+│   │   │           └── erp/
+│   │   │               └── payroll/
+│   │   │                   ├── RwandaErpPayrollApplication.java  // Main Spring Boot application class
+│   │   │                   ├── config/                       // Spring Security, JWT, and other configurations
+│   │   │                   │   ├── SecurityConfig.java
+│   │   │                   │   └── WebConfig.java
+│   │   │                   ├── controller/                   // REST API endpoints
+│   │   │                   │   ├── AuthController.java
+│   │   │                   │   ├── EmployeeController.java
+│   │   │                   │   ├── EmploymentController.java
+│   │   │                   │   ├── DeductionController.java
+│   │   │                   │   ├── PayslipController.java
+│   │   │                   │   └── MessageController.java
+│   │   │                   ├── dto/                          // Data Transfer Objects (for API requests/responses)
+│   │   │                   │   ├── AuthRequest.java
+│   │   │                   │   ├── AuthResponse.java
+│   │   │                   │   ├── EmployeeDto.java
+│   │   │                   │   ├── EmploymentDto.java
+│   │   │                   │   ├── DeductionDto.java
+│   │   │                   │   ├── PayslipDto.java
+│   │   │                   │   └── MessageDto.java
+│   │   │                   ├── exception/                    // Custom exception classes
+│   │   │                   │   └── ResourceNotFoundException.java
+│   │   │                   ├── model/                        // JPA Entities (database tables)
+│   │   │                   │   ├── Employee.java
+│   │   │                   │   ├── Employment.java
+│   │   │                   │   ├── Deduction.java
+│   │   │                   │   ├── Payslip.java
+│   │   │                   │   └── Message.java
+│   │   │                   ├── repository/                   // Spring Data JPA repositories
+│   │   │                   │   ├── EmployeeRepository.java
+│   │   │                   │   ├── EmploymentRepository.java
+│   │   │                   │   ├── DeductionRepository.java
+│   │   │                   │   ├── PayslipRepository.java
+│   │   │                   │   └── MessageRepository.java
+│   │   │                   ├── security/                     // JWT related classes
+│   │   │                   │   ├── JwtAuthenticationEntryPoint.java
+│   │   │                   │   ├── JwtAuthenticationFilter.java
+│   │   │                   │   ├── JwtTokenProvider.java
+│   │   │                   │   └── CustomUserDetailsService.java
+│   │   │                   ├── service/                      // Business logic layer
+│   │   │                   │   ├── AuthService.java
+│   │   │                   │   ├── EmployeeService.java
+│   │   │                   │   ├── EmploymentService.java
+│   │   │                   │   ├── DeductionService.java
+│   │   │                   │   ├── PayslipService.java
+│   │   │                   │   └── MessageService.java
+│   │   │                   └── util/                         // Utility classes
+│   │   │                       └── AppConstants.java
+│   │   └── resources/
+│   │       ├── application.properties                      // Application configuration (DB, server port, JWT secret)
+│   │       ├── static/                                     // Static resources (if any, e.g., HTML, CSS, JS for a simple frontend)
+│   │       └── templates/                                  // Template files (e.g., Thymeleaf, if using server-side rendering)
+│   └── test/
+│       └── java/
+│           └── com/
+│               └── rwanda/
+│                   └── erp/
+│                       └── payroll/
+│                           └── ...                           // Unit and integration tests
+├── .gitignore                                            // Git ignore file
+├── pom.xml                                               // Maven Project Object Model (dependencies, build config)
+└── README.md                                             // Project description and setup instructions
+
+
++----------------+          +----------------+          +----------------+
+|    Employee    |          |   Employment   |          |    Deduction   |
++----------------+          +----------------+          +----------------+
+| PK id: Long    |          | PK id: Long    |          | PK id: Long    |
+| code: String   |          | code: String   |          | code: String   |
+| firstName: String|        | FK employee_id:|----------|> employee: Employee|
+| lastName: String |        |   Long         |          | deductionName: String|
+| email: String  |          | department: String|        | percentage: Double|
+| password: String |        | position: String |        |                |
+| mobile: String |          | baseSalary: Double|        |                |
+| dateOfBirth: LocalDate|    | status: Enum   |          |                |
+| status: Enum   |          | joiningDate: LocalDate|    |                |
++----------------+          +----------------+          +----------------+
+      |                           |
+      | 1                         1 (Unique on employee_id + status)
+      |                           |
+      |                           |
+      |                           |
+      |                           |
+      |                           |
+      |                           |
+      | M                         N
+      |                           |
++-----+---------------------------------------+
+|                       Payslip               |
++---------------------------------------------+
+| PK id: Long                                 |
+| FK employee_id: Long   <--------------------| employee: Employee          |
+| baseSalaryAtGeneration: Double              |
+| housingAmount: Double                       |
+| transportAmount: Double                     |
+| employeeTaxedAmount: Double                 |
+| pensionAmount: Double                       |
+| medicalInsuranceAmount: Double              |
+| otherTaxedAmount: Double                    |
+| grossSalary: Double                         |
+| netSalary: Double                           |
+| month: Integer                              |
+| year: Integer                               |
+| status: Enum                                |
+| generationDate: LocalDate                   |
+| approvalDate: LocalDate                     |
++---------------------------------------------+
+      |
+      | 1
+      |
+      | N
+      |
++----------------+
+|     Message    |
++----------------+
+| PK id: Long    |
+| FK employee_id:|----------|> employee: Employee|
+|   Long         |
+| message: String|
+| month: Integer |
+| year: Integer  |
+| sentDate: LocalDate|
++----------------+
+
++----------------+
+|      Role      |
++----------------+
+| PK id: Integer |
+| name: ERole    |
++----------------+
+      |
+      | Many-to-Many
+      |
++----------------+
+| Employee_Roles | (Join Table)
++----------------+
+| FK employee_id |
+| FK role_id     |
++----------------+
