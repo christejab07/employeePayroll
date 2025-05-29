@@ -187,35 +187,6 @@ public class PayslipService {
                     payslip.getMonth(),
                     payslip.getYear()
             );
-            // Send email notification
-            String subject = "Salary Payment Notification - " + month + "/" + year;
-            Employee employee = new Employee();
-            String emailContent = String.format("""
-                    <html>
-                    <body>
-                    <h2>Salary Payment Notification</h2>
-                    <p>Dear %s %s,</p>
-                    <p>Your salary for %d/%d has been processed and approved with the following details:</p>
-                    <ul>
-                        <li>Gross Salary: %.2f RWF</li>
-                        <li>Net Salary: %.2f RWF</li>
-                        <li>Approval Date: %s</li>
-                    </ul>
-                    <p>Your salary has been credited to your account.</p>
-                    <p>Best regards,<br/>HR Department</p>
-                    </body>
-                    </html>
-                    """,
-                    employee.getFirstName(),
-                    employee.getLastName(),
-                    month,
-                    year,
-                    payslip.getGrossSalary(),
-                    payslip.getNetSalary(),
-                    payslip.getApprovalDate()
-            );
-            emailService.sendPayslipEmail(employee.getEmail(), subject, emailContent);
-
 
         }
 

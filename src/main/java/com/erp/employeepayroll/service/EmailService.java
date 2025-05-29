@@ -37,9 +37,3 @@ public class EmailService {
     }
 }
 //# application-dev.properties
-//spring.mail.host=sandbox.smtp.mailtrap.io
-//spring.mail.port=2525
-//spring.mail.username=11c792a1f55e19
-//spring.mail.password=0e9e4cddca0286
-//spring.mail.properties.mail.smtp.auth=true
-//spring.mail.properties.mail.smtp.starttls.enable=true
